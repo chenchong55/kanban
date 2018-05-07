@@ -3,56 +3,346 @@
   <head>
     <meta charset="utf-8">
     <title>数据看板</title>
-    <!--第一步：引入Javascript / CSS （CDN）-->
+        <!--第一步:引入Javascript / CSS （CDN）-->
 <!-- DataTables CSS -->
 <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/fixedcolumns/3.0.1/css/dataTables.fixedColumns.css" />
 <!-- jQuery -->
 <script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <!-- DataTables -->
 <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="./source/dataTables.fixedColumns.js"></script>
 
-
+<style>
+  .dataTable th {
+    white-space: nowrap !important;
+  }
+  div.dataTables_wrapper {
+        width: 100%;
+        margin: 0 auto;
+  }
+</style>
   </head>
   <body>
-    <table id="example" class="display" style="width:100%">
+    <table id="example" class="display" cellspacing="0" style="width:100%">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Extn.</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>修理工</th>
+                <th>08:00</th>
+                <th>08:30</th>
+                <th>09:00</th>
+                <th>09:30</th>
+                <th>10:00</th>
+                <th>10:30</th>
+                <th>11:00</th>
+                <th>11:30</th>
+                <th>12:00</th>
+                <th>12:30</th>
+                <th>13:00</th>
+                <th>13:30</th>
+                <th>14:00</th>
+                <th>14:30</th>
+                <th>15:00</th>
+                <th>15:30</th>
+                <th>16:00</th>
+                <th>16:30</th>
+                <th>17:00</th>
+                <th>17:30</th>
+                <th>18:00</th>
+                <th>18:30</th>
             </tr>
         </thead>
-        <tfoot>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Extn.</th>
-                <th>Start date</th>
-                <th>Salary</th>
-            </tr>
-        </tfoot>
-
 
     </table>
-    <script type="text/javascript">
-    $(document).ready(function() {
-    $('#example').DataTable( {
-        "processing": true,
-        "ajax": "data.txt",
-        "columns": [
-            { "data": "name" },
-            { "data": "hr.position" },
-            { "data": "contact.0" },
-            { "data": "contact.1" },
-            { "data": "hr.start_date" },
-            { "data": "hr.salary" }
-        ]
-    } );
+
+
+  <script type="text/javascript">
+  $(document).ready(function() {
+      var table = $('#example').DataTable( {
+          fixedColumns: true,
+          "autoWidth": true,
+          "createdRow": function ( row, data, index ) {
+                    if ( data['S0800'] > 0 ) {
+                        $('td', row).eq(1).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S0830'] > 0 ) {
+                        $('td', row).eq(2).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S0900'] > 0 ) {
+                        $('td', row).eq(3).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S0930'] > 0 ) {
+                        $('td', row).eq(4).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1000'] > 0 ) {
+                        $('td', row).eq(5).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1030'] > 0 ) {
+                        $('td', row).eq(6).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1100'] > 0 ) {
+                        $('td', row).eq(7).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1130'] > 0 ) {
+                        $('td', row).eq(8).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1200'] > 0 ) {
+                        $('td', row).eq(9).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1230'] > 0 ) {
+                        $('td', row).eq(10).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1300'] > 0 ) {
+                        $('td', row).eq(11).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1330'] > 0 ) {
+                        $('td', row).eq(12).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1400'] > 0 ) {
+                        $('td', row).eq(13).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1430'] > 0 ) {
+                        $('td', row).eq(14).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1500'] > 0 ) {
+                        $('td', row).eq(15).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1530'] > 0 ) {
+                        $('td', row).eq(16).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1600'] > 0 ) {
+                        $('td', row).eq(17).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1630'] > 0 ) {
+                        $('td', row).eq(18).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1700'] > 0 ) {
+                        $('td', row).eq(19).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1730'] > 0 ) {
+                        $('td', row).eq(20).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1800'] > 0 ) {
+                        $('td', row).eq(21).css("background-color","#DEDEDE");
+                    }
+                    if ( data['S1830'] > 0 ) {
+                        $('td', row).eq(22).css("background-color","#DEDEDE");
+                    }
+            },
+          ajax: {
+            url:"./data.json",
+            contentType: "application/json"
+          },
+
+          scrollX:        true,
+          "autoWidth":true,
+          "searching": true,//关闭搜索框
+          "ordering": false,//排序
+          "bInfo": false,
+          language: {
+            "sProcessing": "处理中...",
+            "sLengthMenu": "显示 _MENU_ 项结果",
+            "sZeroRecords": "没有匹配结果",
+            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索:",
+            "sUrl": "",
+            "sEmptyTable": "表中数据为空",
+            "sLoadingRecords": "载入中...",
+            "sInfoThousands": ",",
+            "oPaginate": {
+                "sFirst": "首页",
+                "sPrevious": "上页",
+                "sNext": "下页",
+                "sLast": "末页"
+            }},
+          columns: [
+              { data: "xlg" },
+              { data: "S0800",
+                "render": function(data,type,row,meta){
+                 if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                },
+                "width":"100px"
+               },
+              { data: "S0830","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+              },
+              { data: "S0900","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+              },
+              { data: "S0930","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+              },
+              { data: "S1000","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+              },
+              { data: "S1030","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+               },
+              { data: "S1100","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+              },
+              { data: "S1130","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+               },
+              { data: "S1200","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+               },
+              { data: "S1230","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+              },
+              { data: "S1300","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+               },
+              { data: "S1330","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+               },
+              { data: "S1400","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+               },
+              { data: "S1430","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+              },
+              { data: "S1500","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+              },
+              { data: "S1530","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+              },
+              { data: "S1600","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+              },
+              { data: "S1630","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+              },
+              { data: "S1700","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+              },
+              { data: "S1730","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return '';
+                  }
+                }
+              },
+              { data: "S1800","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return data;
+                  }
+                }
+              },
+              { data: "S1830","render": function(data,type,row,meta){
+                  if(data == "0"){
+                    return data = '';
+                  }else{
+                    return data;
+                  }
+                }
+              }
+          ]
+      } );
+  // new $.fn.dataTable.FixedColumns(table,{"iLeftColumns":1});
+
   } );
-    </script>
-  </body>
+  </script>
+    </body>
 </html>
