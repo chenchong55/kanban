@@ -1,348 +1,559 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>数据看板</title>
-        <!--第一步:引入Javascript / CSS （CDN）-->
-<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
-<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/fixedcolumns/3.0.1/css/dataTables.fixedColumns.css" />
-<!-- jQuery -->
-<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="./source/dataTables.fixedColumns.js"></script>
 
-<style>
-  .dataTable th {
-    white-space: nowrap !important;
-  }
-  div.dataTables_wrapper {
-        width: 100%;
-        margin: 0 auto;
-  }
-</style>
-  </head>
-  <body>
-    <table id="example" class="display" cellspacing="0" style="width:100%">
-        <thead>
-            <tr>
-                <th>修理工</th>
-                <th>08:00</th>
-                <th>08:30</th>
-                <th>09:00</th>
-                <th>09:30</th>
-                <th>10:00</th>
-                <th>10:30</th>
-                <th>11:00</th>
-                <th>11:30</th>
-                <th>12:00</th>
-                <th>12:30</th>
-                <th>13:00</th>
-                <th>13:30</th>
-                <th>14:00</th>
-                <th>14:30</th>
-                <th>15:00</th>
-                <th>15:30</th>
-                <th>16:00</th>
-                <th>16:30</th>
-                <th>17:00</th>
-                <th>17:30</th>
-                <th>18:00</th>
-                <th>18:30</th>
-            </tr>
-        </thead>
+<head>
+  <meta charset="utf-8">
+  <title>数据看板</title>
+  <!--第一步:引入Javascript / CSS （CDN）-->
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/fixedcolumns/3.0.1/css/dataTables.fixedColumns.css" />
+  <!-- jQuery -->
+  <script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <!-- DataTables -->
+  <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" src="./source/dataTables.fixedColumns.js"></script>
 
-    </table>
+  <style>
+    .fontContent {
+      font-size: 5px;
+    }
 
+    .dataTable th {
+      white-space: nowrap !important;
+    }
+
+    div.dataTables_wrapper {
+      width: 100%;
+      margin: 0 auto;
+      font-size: 5px;
+    }
+
+    .move1 {
+      position: relative;
+      animation: mymove 10s infinite linear;
+    }
+
+  </style>
+</head>
+
+<body>
+  <table id="example" class="display" cellspacing="0" class="fontContent" style="table-layout:fixed;width:expression(document.documentElement.clientWidth + " px ");">
+    <thead>
+
+      <tr>
+        <th>修理工</th>
+        <th>08:00</th>
+        <th>08:30</th>
+        <th>09:00</th>
+        <th>09:30</th>
+        <th>10:00</th>
+        <th>10:30</th>
+        <th>11:00</th>
+        <th>11:30</th>
+        <th>12:00</th>
+        <th>12:30</th>
+        <th>13:00</th>
+        <th>13:30</th>
+        <th>14:00</th>
+        <th>14:30</th>
+        <th>15:00</th>
+        <th>15:30</th>
+        <th>16:00</th>
+        <th>16:30</th>
+        <th>17:00</th>
+        <th>17:30</th>
+        <th>18:00</th>
+        <th>18:30</th>
+      </tr>
+    </thead>
+
+  </table>
+  <div class="move1" style="position:absolute; top:70px;left:100px;background-color:#f0f0f0;">
+    <hr style="border:1px dotted #ccc; height:860px; width:0.1px;">
+  </div>
 
   <script type="text/javascript">
-  $(document).ready(function() {
-      var table = $('#example').DataTable( {
-          fixedColumns: true,
-          "autoWidth": true,
-          "createdRow": function ( row, data, index ) {
-                    if ( data['S0800'] > 0 ) {
-                        $('td', row).eq(1).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S0830'] > 0 ) {
-                        $('td', row).eq(2).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S0900'] > 0 ) {
-                        $('td', row).eq(3).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S0930'] > 0 ) {
-                        $('td', row).eq(4).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1000'] > 0 ) {
-                        $('td', row).eq(5).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1030'] > 0 ) {
-                        $('td', row).eq(6).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1100'] > 0 ) {
-                        $('td', row).eq(7).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1130'] > 0 ) {
-                        $('td', row).eq(8).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1200'] > 0 ) {
-                        $('td', row).eq(9).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1230'] > 0 ) {
-                        $('td', row).eq(10).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1300'] > 0 ) {
-                        $('td', row).eq(11).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1330'] > 0 ) {
-                        $('td', row).eq(12).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1400'] > 0 ) {
-                        $('td', row).eq(13).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1430'] > 0 ) {
-                        $('td', row).eq(14).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1500'] > 0 ) {
-                        $('td', row).eq(15).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1530'] > 0 ) {
-                        $('td', row).eq(16).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1600'] > 0 ) {
-                        $('td', row).eq(17).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1630'] > 0 ) {
-                        $('td', row).eq(18).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1700'] > 0 ) {
-                        $('td', row).eq(19).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1730'] > 0 ) {
-                        $('td', row).eq(20).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1800'] > 0 ) {
-                        $('td', row).eq(21).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1830'] > 0 ) {
-                        $('td', row).eq(22).css("background-color","#DEDEDE");
-                    }
-            },
-          ajax: {
-            url:"./data.json",
-            contentType: "application/json"
+    var i = 0;
+    $(document).ready(function() {
+      var table = $('#example').DataTable({
+        fixedColumns: true,
+        bAutoWidth: false,
+        autoWidth: false,
+
+        "createdRow": function(row, data, index) {
+          if (data['S0800'] > 0) {
+            $('td', row).eq(1).css("background-color", "#DEDEDE");
+          }
+          if (data['S0830'] > 0) {
+            $('td', row).eq(2).css("background-color", "#DEDEDE");
+          }
+          if (data['S0900'] > 0) {
+            $('td', row).eq(3).css("background-color", "#DEDEDE");
+          }
+          if (data['S0930'] > 0) {
+            $('td', row).eq(4).css("background-color", "#DEDEDE");
+          }
+          if (data['S1000'] > 0) {
+            $('td', row).eq(5).css("background-color", "#DEDEDE");
+          }
+          if (data['S1030'] > 0) {
+            $('td', row).eq(6).css("background-color", "#DEDEDE");
+          }
+          if (data['S1100'] > 0) {
+            $('td', row).eq(7).css("background-color", "#DEDEDE");
+          }
+          if (data['S1130'] > 0) {
+            $('td', row).eq(8).css("background-color", "#DEDEDE");
+          }
+          if (data['S1200'] > 0) {
+            $('td', row).eq(9).css("background-color", "#DEDEDE");
+          }
+          if (data['S1230'] > 0) {
+            $('td', row).eq(10).css("background-color", "#DEDEDE");
+          }
+          if (data['S1300'] > 0) {
+            $('td', row).eq(11).css("background-color", "#DEDEDE");
+          }
+          if (data['S1330'] > 0) {
+            $('td', row).eq(12).css("background-color", "#DEDEDE");
+          }
+          if (data['S1400'] > 0) {
+            $('td', row).eq(13).css("background-color", "#DEDEDE");
+          }
+          if (data['S1430'] > 0) {
+            $('td', row).eq(14).css("background-color", "#DEDEDE");
+          }
+          if (data['S1500'] > 0) {
+            $('td', row).eq(15).css("background-color", "#DEDEDE");
+          }
+          if (data['S1530'] > 0) {
+            $('td', row).eq(16).css("background-color", "#DEDEDE");
+          }
+          if (data['S1600'] > 0) {
+            $('td', row).eq(17).css("background-color", "#DEDEDE");
+          }
+          if (data['S1630'] > 0) {
+            $('td', row).eq(18).css("background-color", "#DEDEDE");
+          }
+          if (data['S1700'] > 0) {
+            $('td', row).eq(19).css("background-color", "#DEDEDE");
+          }
+          if (data['S1730'] > 0) {
+            $('td', row).eq(20).css("background-color", "#DEDEDE");
+          }
+          if (data['S1800'] > 0) {
+            $('td', row).eq(21).css("background-color", "#DEDEDE");
+          }
+          if (data['S1830'] > 0) {
+            $('td', row).eq(22).css("background-color", "#DEDEDE");
+          }
+        },
+        ajax: {
+          url: "./data.json",
+          contentType: "application/json"
+        },
+
+        scrollX: false,
+        "paging": false,
+        "searching": true, //关闭搜索框
+        "ordering": false, //排序
+        "bInfo": false,
+        language: {
+          "sProcessing": "处理中...",
+          "sLengthMenu": "显示 _MENU_ 项结果",
+          "sZeroRecords": "没有匹配结果",
+          "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+          "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+          "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+          "sInfoPostFix": "",
+          "sSearch": "搜索:",
+          "sUrl": "",
+          "sEmptyTable": "表中数据为空",
+          "sLoadingRecords": "载入中...",
+          "sInfoThousands": ",",
+          "oPaginate": {
+            "sFirst": "首页",
+            "sPrevious": "上页",
+            "sNext": "下页",
+            "sLast": "末页"
+          }
+        },
+        "columnDefs": [
+          //给第一列指定宽度为表格整个宽度的20%
+          {
+            "width": "5%",
+            "targets": 0
           },
+          {
+            "width": "4.3%",
+            "targets": 1
+          },
+          {
+            "width": "4.3%",
+            "targets": 2
+          },
+          {
+            "width": "4.3%",
+            "targets": 3
+          },
+          {
+            "width": "4.3%",
+            "targets": 4
+          },
+          {
+            "width": "4.3%",
+            "targets": 5
+          },
+          {
+            "width": "4.3%",
+            "targets": 6
+          },
+          {
+            "width": "4.3%",
+            "targets": 7
+          },
+          {
+            "width": "4.3%",
+            "targets": 8
+          },
+          {
+            "width": "4.3%",
+            "targets": 9
+          },
+          {
+            "width": "4.3%",
+            "targets": 10
+          },
+          {
+            "width": "4.3%",
+            "targets": 11
+          },
+          {
+            "width": "4.3%",
+            "targets": 12
+          },
+          {
+            "width": "4.3%",
+            "targets": 13
+          },
+          {
+            "width": "4.3%",
+            "targets": 14
+          },
+          {
+            "width": "4.3%",
+            "targets": 15
+          },
+          {
+            "width": "4.3%",
+            "targets": 16
+          },
+          {
+            "width": "4.3%",
+            "targets": 17
+          },
+          {
+            "width": "4.3%",
+            "targets": 18
+          },
+          {
+            "width": "4.3%",
+            "targets": 19
+          },
+          {
+            "width": "4.3%",
+            "targets": 20
+          },
+          {
+            "width": "4.3%",
+            "targets": 21
+          },
+          {
+            "width": "4.3%",
+            "targets": 22
+          }
 
-          scrollX:        true,
-          "autoWidth":true,
-          "searching": true,//关闭搜索框
-          "ordering": false,//排序
-          "bInfo": false,
-          language: {
-            "sProcessing": "处理中...",
-            "sLengthMenu": "显示 _MENU_ 项结果",
-            "sZeroRecords": "没有匹配结果",
-            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-            "sInfoPostFix": "",
-            "sSearch": "搜索:",
-            "sUrl": "",
-            "sEmptyTable": "表中数据为空",
-            "sLoadingRecords": "载入中...",
-            "sInfoThousands": ",",
-            "oPaginate": {
-                "sFirst": "首页",
-                "sPrevious": "上页",
-                "sNext": "下页",
-                "sLast": "末页"
-            }},
-          columns: [
-              { data: "xlg" },
-              { data: "S0800",
-                "render": function(data,type,row,meta){
-                 if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                },
-                "width":"100px"
-               },
-              { data: "S0830","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S0900","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S0930","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1000","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1030","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-               },
-              { data: "S1100","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1130","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-               },
-              { data: "S1200","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-               },
-              { data: "S1230","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1300","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-               },
-              { data: "S1330","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-               },
-              { data: "S1400","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-               },
-              { data: "S1430","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1500","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1530","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1600","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1630","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1700","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1730","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1800","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return data;
-                  }
-                }
-              },
-              { data: "S1830","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return data;
-                  }
-                }
+        ],
+        columns: [{
+            data: "xlg",
+            "width": "7%"
+          },
+          {
+            data: "S0800",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
               }
-          ]
-      } );
-  // new $.fn.dataTable.FixedColumns(table,{"iLeftColumns":1});
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S0830",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S0900",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
 
-  } );
+          },
+          {
+            data: "S0930",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1000",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1030",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1100",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1130",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1200",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1230",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1300",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1330",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1400",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1430",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1500",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1530",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1600",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1630",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1700",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1730",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return '';
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1800",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return data;
+              }
+            },
+            "width": "4.3%"
+          },
+          {
+            data: "S1830",
+            "render": function(data, type, row, meta) {
+              if (data == "0") {
+                return data = '';
+              } else {
+                return data;
+              }
+            },
+            "width": "4.3%"
+          }
+        ]
+      });
+    });
+
+    // 执行每分钟定时的函数，虚线显示当前的时间
+    window.onload = function() {
+      var date = new Date(); //获取当前时间
+      var hour = date.getHours();
+      var min = (date.getMinutes() / 60).toFixed(2);
+
+      var mathcontent = Number(Math.abs(hour - 8)) + Number(min);
+      var content = (mathcontent / 10.5).toFixed(2);
+
+      var width = document.documentElement.clientWidth; // 屏幕的宽度
+      var width2 = content * width; // 应该显示的位置的宽度
+      $("div.move1").removeClass("left");
+      $("div.move1").css("left", width2 + "px");
+
+      var obj = setInterval(function() {
+        i++;
+        var content = width2 + i;
+        $("div.move1").removeClass("left");
+        $("div.move1").css("left", content + "px");
+
+        //alert(width2+i + "   " + document.documentElement.clientWidth);
+        if (width2 + i > document.documentElement.clientWidth - 10) {
+          clearTimeout(obj);
+        }
+      }, 1000 * 60);
+
+    };
   </script>
-    </body>
+</body>
+
 </html>
