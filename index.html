@@ -15,9 +15,7 @@
   <script type="text/javascript" src="./source/dataTables.fixedColumns.js"></script>
 
   <style>
-    .fontContent {
-      font-size: 5px;
-    }
+
 
     .dataTable th {
       white-space: nowrap !important;
@@ -26,7 +24,7 @@
     div.dataTables_wrapper {
       width: 100%;
       margin: 0 auto;
-      font-size: 5px;
+      font-size: 15px;
     }
 
     .move1 {
@@ -38,7 +36,7 @@
 </head>
 
 <body>
-  <table id="example" class="display" cellspacing="0" class="fontContent" style="table-layout:fixed;width:expression(document.documentElement.clientWidth + " px ");">
+  <table id="example" class="display" cellspacing="0" style="table-layout:fixed;width:expression(document.documentElement.clientWidth + " px ");">
     <thead>
 
       <tr>
@@ -78,9 +76,7 @@
     $(document).ready(function() {
       var table = $('#example').DataTable({
         fixedColumns: true,
-        bAutoWidth: false,
-        autoWidth: false,
-
+        autoWidth: true,
         "createdRow": function(row, data, index) {
           if (data['S0800'] > 0) {
             $('td', row).eq(1).css("background-color", "#DEDEDE");
@@ -179,105 +175,9 @@
             "sLast": "末页"
           }
         },
-        "columnDefs": [
-          //给第一列指定宽度为表格整个宽度的20%
-          {
-            "width": "5%",
-            "targets": 0
-          },
-          {
-            "width": "4.3%",
-            "targets": 1
-          },
-          {
-            "width": "4.3%",
-            "targets": 2
-          },
-          {
-            "width": "4.3%",
-            "targets": 3
-          },
-          {
-            "width": "4.3%",
-            "targets": 4
-          },
-          {
-            "width": "4.3%",
-            "targets": 5
-          },
-          {
-            "width": "4.3%",
-            "targets": 6
-          },
-          {
-            "width": "4.3%",
-            "targets": 7
-          },
-          {
-            "width": "4.3%",
-            "targets": 8
-          },
-          {
-            "width": "4.3%",
-            "targets": 9
-          },
-          {
-            "width": "4.3%",
-            "targets": 10
-          },
-          {
-            "width": "4.3%",
-            "targets": 11
-          },
-          {
-            "width": "4.3%",
-            "targets": 12
-          },
-          {
-            "width": "4.3%",
-            "targets": 13
-          },
-          {
-            "width": "4.3%",
-            "targets": 14
-          },
-          {
-            "width": "4.3%",
-            "targets": 15
-          },
-          {
-            "width": "4.3%",
-            "targets": 16
-          },
-          {
-            "width": "4.3%",
-            "targets": 17
-          },
-          {
-            "width": "4.3%",
-            "targets": 18
-          },
-          {
-            "width": "4.3%",
-            "targets": 19
-          },
-          {
-            "width": "4.3%",
-            "targets": 20
-          },
-          {
-            "width": "4.3%",
-            "targets": 21
-          },
-          {
-            "width": "4.3%",
-            "targets": 22
-          }
-
-        ],
         columns: [{
             data: "xlg",
-            "width": "7%"
+             "width": "8%"
           },
           {
             data: "S0800",
@@ -298,8 +198,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S0900",
@@ -309,8 +209,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
 
           },
           {
@@ -321,8 +221,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1000",
@@ -332,8 +232,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1030",
@@ -343,8 +243,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1100",
@@ -354,8 +254,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1130",
@@ -365,8 +265,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1200",
@@ -376,8 +276,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1230",
@@ -387,8 +287,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1300",
@@ -398,8 +298,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1330",
@@ -409,8 +309,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1400",
@@ -420,8 +320,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1430",
@@ -431,8 +331,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1500",
@@ -442,8 +342,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1530",
@@ -453,8 +353,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1600",
@@ -464,8 +364,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1630",
@@ -475,8 +375,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1700",
@@ -486,8 +386,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1730",
@@ -497,8 +397,8 @@
               } else {
                 return '';
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1800",
@@ -508,8 +408,8 @@
               } else {
                 return data;
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           },
           {
             data: "S1830",
@@ -519,8 +419,8 @@
               } else {
                 return data;
               }
-            },
-            "width": "4.3%"
+            }
+            // "width": "4.3%"
           }
         ]
       });
@@ -536,9 +436,18 @@
       var content = (mathcontent / 10.5).toFixed(2);
 
       var width = document.documentElement.clientWidth; // 屏幕的宽度
-      var width2 = content * width; // 应该显示的位置的宽度
+      var width2 = content * width-100; // 应该显示的位置的宽度
+
+
+
       $("div.move1").removeClass("left");
       $("div.move1").css("left", width2 + "px");
+
+      // if(width2<100){
+      //   alert(111);
+      //   $("div.move1").removeClass("left");
+      //   $(".move1").removeClass("animation");
+      // }
 
       var obj = setInterval(function() {
         i++;
