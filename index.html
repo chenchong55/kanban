@@ -24,7 +24,7 @@
     div.dataTables_wrapper {
       width: 100%;
       margin: 0 auto;
-      font-size: 15px;
+      font-size: 13px;
     }
 
     .move1 {
@@ -76,83 +76,119 @@
     $(document).ready(function() {
       var table = $('#example').DataTable({
         fixedColumns: true,
+        fixedHeader: true,
         autoWidth: true,
+        "scrollY": "600px",
+        "scrollCollapse": "true",
         "createdRow": function(row, data, index) {
-          if (data['S0800'] > 0 && ) {
-            $('td', row).eq(1).css("background-color", "#DEDEDE");
+          var date = new Date(); //获取当前时间
+
+          var hour = date.getHours().toString().length == '1' ? '0'+date.getHours().toString(): date.getHours().toString();
+          var minute = date.getMinutes().toString();
+          var fix = 0;
+          var myArray=new Array("S0800","S0830","S0900","S0930","S1000",
+          "S1030","S1100","S1130","S1200","S1230","S1300","S1330","S1400",
+          "S1430","S1500","S1530","S1600","S1630","S1700","S1730","S1800",
+          "S1830");
+
+          for(var p=0;p<myArray.length;p++){
+          if(myArray[p].toString().substring(1,5)< hour+minute && hour+minute < myArray[p+1].toString().substring(1,5)){
+            if (data[myArray[p]] > 0 && fix == 1){
+              $('td', row).eq(p+1).css("background-color", "#CCCCFF"); //蓝色
+              fix = 1;
+            }else{
+              fix = 0;
+            }
+          }else{
+            if (data[myArray[p]] > 0 && myArray[p].toString().substring(1,5) < hour+minute){
+              $('td', row).eq(p+1).css("background-color", "#CCFFCC"); //绿色
+
+            }else if(data[myArray[p]] > 0 && myArray[p].toString().substring(1,5) > hour+minute){
+              $('td', row).eq(p+1).css("background-color", "#FFCCCC"); // 红色
+            }
           }
-          if (data['S0830'] > 0) {
-            $('td', row).eq(2).css("background-color", "#DEDEDE");
-          }
-          if (data['S0900'] > 0) {
-            $('td', row).eq(3).css("background-color", "#DEDEDE");
-          }
-          if (data['S0930'] > 0) {
-            $('td', row).eq(4).css("background-color", "#DEDEDE");
-          }
-          if (data['S1000'] > 0) {
-            $('td', row).eq(5).css("background-color", "#DEDEDE");
-          }
-          if (data['S1030'] > 0) {
-            $('td', row).eq(6).css("background-color", "#DEDEDE");
-          }
-          if (data['S1100'] > 0) {
-            $('td', row).eq(7).css("background-color", "#DEDEDE");
-          }
-          if (data['S1130'] > 0) {
-            $('td', row).eq(8).css("background-color", "#DEDEDE");
-          }
-          if (data['S1200'] > 0) {
-            $('td', row).eq(9).css("background-color", "#DEDEDE");
-          }
-          if (data['S1230'] > 0) {
-            $('td', row).eq(10).css("background-color", "#DEDEDE");
-          }
-          if (data['S1300'] > 0) {
-            $('td', row).eq(11).css("background-color", "#DEDEDE");
-          }
-          if (data['S1330'] > 0) {
-            $('td', row).eq(12).css("background-color", "#DEDEDE");
-          }
-          if (data['S1400'] > 0) {
-            $('td', row).eq(13).css("background-color", "#DEDEDE");
-          }
-          if (data['S1430'] > 0) {
-            $('td', row).eq(14).css("background-color", "#DEDEDE");
-          }
-          if (data['S1500'] > 0) {
-            $('td', row).eq(15).css("background-color", "#DEDEDE");
-          }
-          if (data['S1530'] > 0) {
-            $('td', row).eq(16).css("background-color", "#DEDEDE");
-          }
-          if (data['S1600'] > 0) {
-            $('td', row).eq(17).css("background-color", "#DEDEDE");
-          }
-          if (data['S1630'] > 0) {
-            $('td', row).eq(18).css("background-color", "#DEDEDE");
-          }
-          if (data['S1700'] > 0) {
-            $('td', row).eq(19).css("background-color", "#DEDEDE");
-          }
-          if (data['S1730'] > 0) {
-            $('td', row).eq(20).css("background-color", "#DEDEDE");
-          }
-          if (data['S1800'] > 0) {
-            $('td', row).eq(21).css("background-color", "#DEDEDE");
-          }
-          if (data['S1830'] > 0) {
-            $('td', row).eq(22).css("background-color", "#DEDEDE");
-          }
+        }
+          // for(var i =1;i<23;i++){
+          //   if (data[i] > 0){
+          //     $('td', row).eq(1).css("background-color", "#CCFFCC");
+          //   }
+          // }
+          // if (data['S0800'] > 0 ) {
+          //   $('td', row).eq(1).css("background-color", "#CCFFCC");
+          //   fix = 1;
+          // }
+          // if (data['S0830'] > 0) {
+          //   $('td', row).eq(2).css("background-color", "#CCFFCC");
+          // }
+          // if (data['S0900'] > 0 ) {
+          //   $('td', row).eq(3).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S0930'] > 0) {
+          //   $('td', row).eq(4).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1000'] > 0) {
+          //   $('td', row).eq(5).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1030'] > 0) {
+          //   $('td', row).eq(6).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1100'] > 0) {
+          //   $('td', row).eq(7).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1130'] > 0) {
+          //   $('td', row).eq(8).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1200'] > 0) {
+          //   $('td', row).eq(9).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1230'] > 0) {
+          //   $('td', row).eq(10).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1300'] > 0) {
+          //   $('td', row).eq(11).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1330'] > 0) {
+          //   $('td', row).eq(12).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1400'] > 0) {
+          //   $('td', row).eq(13).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1430'] > 0) {
+          //   $('td', row).eq(14).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1500'] > 0) {
+          //   $('td', row).eq(15).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1530'] > 0) {
+          //   $('td', row).eq(16).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1600'] > 0) {
+          //   $('td', row).eq(17).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1630'] > 0) {
+          //   $('td', row).eq(18).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1700'] > 0) {
+          //   $('td', row).eq(19).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1730'] > 0) {
+          //   $('td', row).eq(20).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1800'] > 0) {
+          //   $('td', row).eq(21).css("background-color", "#DEDEDE");
+          // }
+          // if (data['S1830'] > 0) {
+          //   $('td', row).eq(22).css("background-color", "#DEDEDE");
+          // }
         },
         ajax: {
           url: "./data.json",
           contentType: "application/json"
         },
 
-        scrollX: false,
+        scrollX: true,
         "paging": false,
-        "searching": true, //关闭搜索框
+        "searching": false, //关闭搜索框
         "ordering": false, //排序
         "bInfo": false,
         language: {
@@ -428,6 +464,7 @@
 
     // 执行每分钟定时的函数，虚线显示当前的时间
     window.onload = function() {
+
       var date = new Date(); //获取当前时间
       var hour = date.getHours();
       var min = (date.getMinutes() / 60).toFixed(2);
