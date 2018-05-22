@@ -40,35 +40,35 @@
     <thead>
 
       <tr>
-        <th>修理工</th>
-        <th>08:00</th>
-        <th>08:30</th>
-        <th>09:00</th>
-        <th>09:30</th>
-        <th>10:00</th>
-        <th>10:30</th>
-        <th>11:00</th>
-        <th>11:30</th>
-        <th>12:00</th>
-        <th>12:30</th>
-        <th>13:00</th>
-        <th>13:30</th>
-        <th>14:00</th>
-        <th>14:30</th>
-        <th>15:00</th>
-        <th>15:30</th>
-        <th>16:00</th>
-        <th>16:30</th>
-        <th>17:00</th>
-        <th>17:30</th>
-        <th>18:00</th>
-        <th>18:30</th>
+        <th bgcolor="#FFFFCC">修理工</th>
+        <th bgcolor="#CCFFFF">08:00</th>
+        <th bgcolor="#CCFFFF">08:30</th>
+        <th bgcolor="#CCFFFF">09:00</th>
+        <th bgcolor="#CCFFFF">09:30</th>
+        <th bgcolor="#CCFFFF">10:00</th>
+        <th bgcolor="#CCFFFF">10:30</th>
+        <th bgcolor="#CCFFFF">11:00</th>
+        <th bgcolor="#CCFFFF">11:30</th>
+        <th bgcolor="#FFCCCC">12:00</th>
+        <th bgcolor="#FFCCCC">12:30</th>
+        <th bgcolor="#FFCCCC">13:00</th>
+        <th bgcolor="#FFCCCC">13:30</th>
+        <th bgcolor="#FFCCCC">14:00</th>
+        <th bgcolor="#CCCCFF">14:30</th>
+        <th bgcolor="#CCCCFF">15:00</th>
+        <th bgcolor="#CCCCFF">15:30</th>
+        <th bgcolor="#CCCCFF">16:00</th>
+        <th bgcolor="#CCCCFF">16:30</th>
+        <th bgcolor="#CCCCFF">17:00</th>
+        <th bgcolor="#CCCCFF">17:30</th>
+        <th bgcolor="#CCCCFF">18:00</th>
+        <th bgcolor="#CCCCFF">18:30</th>
       </tr>
     </thead>
 
   </table>
   <div class="move1" style="position:absolute; top:70px;left:100px;background-color:#f0f0f0;">
-    <hr style="border:1px dotted #ccc; height:860px; width:0.1px;">
+    <hr style="border:1px dotted #ccc; height:900px; width:0.1px;">
   </div>
 
   <script type="text/javascript">
@@ -78,7 +78,7 @@
         fixedColumns: true,
         autoWidth: true,
         "createdRow": function(row, data, index) {
-          if (data['S0800'] > 0) {
+          if (data['S0800'] > 0 && ) {
             $('td', row).eq(1).css("background-color", "#DEDEDE");
           }
           if (data['S0830'] > 0) {
@@ -177,7 +177,7 @@
         },
         columns: [{
             data: "xlg",
-             "width": "8%"
+             "width": "45px"
           },
           {
             data: "S0800",
@@ -433,21 +433,17 @@
       var min = (date.getMinutes() / 60).toFixed(2);
 
       var mathcontent = Number(Math.abs(hour - 8)) + Number(min);
-      var content = (mathcontent / 10.5).toFixed(2);
+      var content = (mathcontent / 10.5).toFixed(2); // 10.5个小时为全程10.5个小时
+
 
       var width = document.documentElement.clientWidth; // 屏幕的宽度
-      var width2 = content * width-100; // 应该显示的位置的宽度
-
-
-
+      var width2 = content * width; // 应该显示的位置的宽度
+    //alert(width2);
       $("div.move1").removeClass("left");
       $("div.move1").css("left", width2 + "px");
-
-      // if(width2<100){
-      //   alert(111);
-      //   $("div.move1").removeClass("left");
-      //   $(".move1").removeClass("animation");
-      // }
+        if(hour < 8 || (hour >18 && min>30)){ // 如果是8点之前或者18点半之后，就不显示
+          $("div.move1").css("display","none");
+        }
 
       var obj = setInterval(function() {
         i++;
