@@ -29,6 +29,7 @@
 
     .move1 {
       position: relative;
+      margin-left: 15%;
       animation: mymove 10s infinite linear;
     }
 
@@ -67,7 +68,8 @@
     </thead>
 
   </table>
-  <div class="move1" style="position:absolute; top:70px;left:100px;background-color:#f0f0f0;">
+
+  <div class="move1" style="position:absolute; top:50px;left:100px;background-color:#f0f0f0;">
     <hr style="border:1px dotted #ccc; height:900px; width:0.1px;">
   </div>
 
@@ -92,94 +94,23 @@
           "S1830");
 
           for(var p=0;p<myArray.length;p++){
-          if(myArray[p].toString().substring(1,5)< hour+minute && hour+minute < myArray[p+1].toString().substring(1,5)){
-            if (data[myArray[p]] > 0 && fix == 1){
-              $('td', row).eq(p+1).css("background-color", "#CCCCFF"); //蓝色
-              fix = 1;
-            }else{
-              fix = 0;
-            }
-          }else{
-            if (data[myArray[p]] > 0 && myArray[p].toString().substring(1,5) < hour+minute){
-              $('td', row).eq(p+1).css("background-color", "#CCFFCC"); //绿色
 
-            }else if(data[myArray[p]] > 0 && myArray[p].toString().substring(1,5) > hour+minute){
-              $('td', row).eq(p+1).css("background-color", "#FFCCCC"); // 红色
-            }
+          if (data[myArray[p]] > 0 && myArray[p].toString().substring(1,5) < hour+minute){
+              $('td', row).eq(p+1).css("background-color", "#CCFFCC"); //绿色
+          }else if(data[myArray[p]] > 0 && myArray[p].toString().substring(1,5) > hour+minute){
+            $('td', row).eq(p+1).css("background-color", "#FFCCCC"); // 红色
           }
-        }
-          // for(var i =1;i<23;i++){
-          //   if (data[i] > 0){
-          //     $('td', row).eq(1).css("background-color", "#CCFFCC");
-          //   }
-          // }
-          // if (data['S0800'] > 0 ) {
-          //   $('td', row).eq(1).css("background-color", "#CCFFCC");
-          //   fix = 1;
-          // }
-          // if (data['S0830'] > 0) {
-          //   $('td', row).eq(2).css("background-color", "#CCFFCC");
-          // }
-          // if (data['S0900'] > 0 ) {
-          //   $('td', row).eq(3).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S0930'] > 0) {
-          //   $('td', row).eq(4).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1000'] > 0) {
-          //   $('td', row).eq(5).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1030'] > 0) {
-          //   $('td', row).eq(6).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1100'] > 0) {
-          //   $('td', row).eq(7).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1130'] > 0) {
-          //   $('td', row).eq(8).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1200'] > 0) {
-          //   $('td', row).eq(9).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1230'] > 0) {
-          //   $('td', row).eq(10).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1300'] > 0) {
-          //   $('td', row).eq(11).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1330'] > 0) {
-          //   $('td', row).eq(12).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1400'] > 0) {
-          //   $('td', row).eq(13).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1430'] > 0) {
-          //   $('td', row).eq(14).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1500'] > 0) {
-          //   $('td', row).eq(15).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1530'] > 0) {
-          //   $('td', row).eq(16).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1600'] > 0) {
-          //   $('td', row).eq(17).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1630'] > 0) {
-          //   $('td', row).eq(18).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1700'] > 0) {
-          //   $('td', row).eq(19).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1730'] > 0) {
-          //   $('td', row).eq(20).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1800'] > 0) {
-          //   $('td', row).eq(21).css("background-color", "#DEDEDE");
-          // }
-          // if (data['S1830'] > 0) {
-          //   $('td', row).eq(22).css("background-color", "#DEDEDE");
-          // }
+          if(data[myArray[p]] > 0 && myArray[p].toString().substring(1,5)< hour+minute && hour+minute < myArray[p+1].toString().substring(1,5)){
+              $('td', row).eq(p+1).css("background-color", "#99CCCC"); //blue
+              fix = 1;
+          }
+          if(fix == 1 && data[myArray[p]] > 0 ){
+              $('td', row).eq(p).css("background-color", "#99CCCC"); //blue
+              $('td', row).eq(p+1).css("background-color", "#99CCCC"); //blue
+          }
+          }
+
+
         },
         ajax: {
           url: "./data.json",
