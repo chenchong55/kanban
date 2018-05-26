@@ -1,356 +1,347 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>数据看板</title>
-        <!--第一步:引入Javascript / CSS （CDN）-->
-<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
-<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/fixedcolumns/3.0.1/css/dataTables.fixedColumns.css" />
-<!-- jQuery -->
-<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="./source/dataTables.fixedColumns.js"></script>
 
-<style>
-  .dataTable th {
-    white-space: nowrap !important;
-  }
-  div.dataTables_wrapper {
-        width: 100%;
-        margin: 0 auto;
-  }
+<head>
+  <meta charset="utf-8">
+  <title>数据看板</title>
+  <!--第一步:引入Javascript / CSS （CDN）-->
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/fixedcolumns/3.0.1/css/dataTables.fixedColumns.css" />
+  <!-- jQuery -->
+  <script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <!-- DataTables -->
+  <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" src="./source/dataTables.fixedColumns.js"></script>
 
-  .Line{
-    float: left;
-    width: 0.1em;
-    height: 20em;
-    margin-right: 1em;
-    background: #d4c4c4;
-  }
-</style>
-  </head>
-  <body>
-    <table id="example" class="display" cellspacing="0" style="width:100%">
-        <thead>
-            <tr>
-              <div class="Line"></div>
-                <th>修理工</th>
-                <th>08:00</th>
-                <th>08:30</th>
-                <th>09:00</th>
-                <th>09:30</th>
-                <th>10:00</th>
-                <th>10:30</th>
-                <th>11:00</th>
-                <th>11:30</th>
-                <th>12:00</th>
-                <th>12:30</th>
-                <th>13:00</th>
-                <th>13:30</th>
-                <th>14:00</th>
-                <th>14:30</th>
-                <th>15:00</th>
-                <th>15:30</th>
-                <th>16:00</th>
-                <th>16:30</th>
-                <th>17:00</th>
-                <th>17:30</th>
-                <th>18:00</th>
-                <th>18:30</th>
-            </tr>
-        </thead>
+  <style>
+  td{white-space: nowrap;}
 
-    </table>
+    .dataTable th {
+      white-space: nowrap !important;
+    }
 
+    div.dataTables_wrapper {
+      width: 100%;
+      margin: 0 auto;
+      font-size: 13px;
+    }
+    .move1 {
+      position: relative;
+      margin-left: 90px;
+      animation: mymove 10s infinite linear;
+    }
+    .opper1{
+      font-size:40%;
+      background-color: #339933;/*green */
+      border-left: 200px;
+    }
+
+    .opper2{
+      font-size:40%;
+     background-color: #0099CC;  /*blue */
+      border-left: 200px;
+    }
+
+    .opper3{
+      font-size:40%;
+      background-color: #FF6666;
+      border-left: 200px;
+    }
+
+
+
+  </style>
+</head>
+
+<body>
+  <table id="example" class="display" cellspacing="0" style="table-layout:fixed;width:expression(document.documentElement.clientWidth + " px ");">
+    <thead>
+
+      <tr>
+        <th >主修工</th>
+        <!-- <th bgcolor="#FFFFCC">状态</th> -->
+        <th bgcolor="#FCFCFC">08:00</th>
+        <th bgcolor="#FCFCFC">08:30</th>
+        <th bgcolor="#FCFCFC">09:00</th>
+        <th bgcolor="#FCFCFC">09:30</th>
+        <th bgcolor="#FCFCFC">10:00</th>
+        <th bgcolor="#FCFCFC">10:30</th>
+        <th bgcolor="#FCFCFC">11:00</th>
+        <th bgcolor="#FCFCFC">11:30</th>
+        <th bgcolor="#F0F0F0">12:00</th>
+        <th bgcolor="#F0F0F0">12:30</th>
+        <th bgcolor="#F0F0F0">13:00</th>
+        <th bgcolor="#F0F0F0">13:30</th>
+        <th bgcolor="#F0F0F0">14:00</th>
+        <th >14:30</th>
+        <th >15:00</th>
+        <th >15:30</th>
+        <th >16:00</th>
+        <th >16:30</th>
+        <th >17:00</th>
+        <th >17:30</th>
+        <th >18:00</th>
+        <th >18:30</th>
+      </tr>
+    </thead>
+
+  </table>
+
+  <div class="move1" style="position:absolute; top:50px;left:100px;background-color:#f0f0f0;">
+    <hr style="border:1px dotted #ccc; height:900px; width:0.1px;">
+  </div>
 
   <script type="text/javascript">
-  $(document).ready(function() {
-      var table = $('#example').DataTable( {
-          fixedColumns: true,
-          "autoWidth": true,
-          "createdRow": function ( row, data, index ) {
-                    if ( data['S0800'] > 0 ) {
-                        $('td', row).eq(1).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S0830'] > 0 ) {
-                        $('td', row).eq(2).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S0900'] > 0 ) {
-                        $('td', row).eq(3).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S0930'] > 0 ) {
-                        $('td', row).eq(4).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1000'] > 0 ) {
-                        $('td', row).eq(5).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1030'] > 0 ) {
-                        $('td', row).eq(6).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1100'] > 0 ) {
-                        $('td', row).eq(7).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1130'] > 0 ) {
-                        $('td', row).eq(8).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1200'] > 0 ) {
-                        $('td', row).eq(9).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1230'] > 0 ) {
-                        $('td', row).eq(10).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1300'] > 0 ) {
-                        $('td', row).eq(11).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1330'] > 0 ) {
-                        $('td', row).eq(12).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1400'] > 0 ) {
-                        $('td', row).eq(13).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1430'] > 0 ) {
-                        $('td', row).eq(14).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1500'] > 0 ) {
-                        $('td', row).eq(15).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1530'] > 0 ) {
-                        $('td', row).eq(16).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1600'] > 0 ) {
-                        $('td', row).eq(17).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1630'] > 0 ) {
-                        $('td', row).eq(18).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1700'] > 0 ) {
-                        $('td', row).eq(19).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1730'] > 0 ) {
-                        $('td', row).eq(20).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1800'] > 0 ) {
-                        $('td', row).eq(21).css("background-color","#DEDEDE");
-                    }
-                    if ( data['S1830'] > 0 ) {
-                        $('td', row).eq(22).css("background-color","#DEDEDE");
-                    }
-            },
-          ajax: {
-            url:"./data.json",
-            contentType: "application/json"
+    var i = 0;
+    $(document).ready(function() {
+      var table = $('#example').DataTable({
+        fixedColumns: true,
+        fixedHeader: true,
+        //autoWidth: true,
+        "scrollY": "600px",
+        "scrollCollapse": "true",
+        "createdRow": function(row, data, index) {
+          var date = new Date(); //获取当前时间
+
+          var hour = date.getHours().toString().length == '1' ? '0'+date.getHours().toString(): date.getHours().toString();
+          var minute = date.getMinutes().toString();
+          var fix = 0;
+          var myArray=new Array("S0800","S0830","S0900","S0930","S1000",
+          "S1030","S1100","S1130","S1200","S1230","S1300","S1330","S1400",
+          "S1430","S1500","S1530","S1600","S1630","S1700","S1730","S1800",
+          "S1830");
+
+          for(var p=0;p<myArray.length;p++){
+            var temp = data[myArray[p]].toString();
+            if ((temp.length > 1 && temp.substring(temp.length-1) == 1) || (temp.length == 1 && temp == 1)){
+                $('td', row).eq(p+1).text(data[myArray[p]].toString().length==1 ? '':data[myArray[p]].toString());
+                $('td', row).eq(p+1).addClass("opper1");
+
+            }else if((temp.length > 1 && temp.substring(temp.length-1) == 2) || (temp.length == 1 && temp == 2)){
+                $('td', row).eq(p+1).text(data[myArray[p]].toString().length==1 ? '':data[myArray[p]].toString());
+                $('td', row).eq(p+1).addClass("opper2");
+            }else if((temp.length > 1 && temp.substring(temp.length-1) == 3) || (temp.length == 1 && temp == 3)){
+                $('td', row).eq(p+1).text(data[myArray[p]].toString().length==1 ? '':data[myArray[p]].toString());
+                $('td', row).eq(p+1).addClass("opper3");
+            }
+          }
+        },
+        ajax: {
+          url: "./data2.json",
+          contentType: "application/json",
+          dataSrc: 'data'
+        },
+        scrollX:false,
+        "paging": false,
+        "searching": false, //关闭搜索框
+        "ordering": false, //排序
+        "bInfo": false,
+        language: {
+          "sProcessing": "处理中...",
+          "sLengthMenu": "显示 _MENU_ 项结果",
+          "sZeroRecords": "没有匹配结果",
+          "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+          "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+          "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+          "sInfoPostFix": "",
+          "sSearch": "搜索:",
+          "sUrl": "",
+          "sEmptyTable": "表中数据为空",
+          "sLoadingRecords": "载入中...",
+          "sInfoThousands": ",",
+          "oPaginate": {
+            "sFirst": "首页",
+            "sPrevious": "上页",
+            "sNext": "下页",
+            "sLast": "末页"
+          }
+        },
+        "columns": [
+          {
+            data:"xlg",
+            width:'45px'
           },
-          scrollX:        true,
-          "autoWidth":true,
-            "paging": false,
-          "searching": true,//关闭搜索框
-          "ordering": false,//排序
-          "bInfo": false,
-          language: {
-            "sProcessing": "处理中...",
-            "sLengthMenu": "显示 _MENU_ 项结果",
-            "sZeroRecords": "没有匹配结果",
-            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-            "sInfoPostFix": "",
-            "sSearch": "搜索:",
-            "sUrl": "",
-            "sEmptyTable": "表中数据为空",
-            "sLoadingRecords": "载入中...",
-            "sInfoThousands": ",",
-            "oPaginate": {
-                "sFirst": "首页",
-                "sPrevious": "上页",
-                "sNext": "下页",
-                "sLast": "末页"
-            }},
-          columns: [
-              { data: "xlg" },
-              { data: "S0800",
-                "render": function(data,type,row,meta){
-                 if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                },
-                "width":"100px"
-               },
-              { data: "S0830","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S0900","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S0930","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1000","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1030","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-               },
-              { data: "S1100","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1130","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-               },
-              { data: "S1200","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-               },
-              { data: "S1230","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1300","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-               },
-              { data: "S1330","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-               },
-              { data: "S1400","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-               },
-              { data: "S1430","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1500","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1530","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1600","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1630","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1700","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1730","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return '';
-                  }
-                }
-              },
-              { data: "S1800","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return data;
-                  }
-                }
-              },
-              { data: "S1830","render": function(data,type,row,meta){
-                  if(data == "0"){
-                    return data = '';
-                  }else{
-                    return data;
-                  }
-                }
+          {
+            data:"S0800",
+            render: function(data, type, row) {
+              if(data.toString().length > 1){
+                return data.substr(0,data.toString().length - 1)
+              }else{
+                return '';
               }
-          ]
-      } );
-  // new $.fn.dataTable.FixedColumns(table,{"iLeftColumns":1});
-  } );
+            }
+          },
+          {
+            data:"S0830",
+            render: function(data, type, row){
+              if(data.toString().length > 1){
+                return data.substr(0,data.toString().length - 1)
+              }else{
+                return '';
+              }
+            }
+          }
+          ,
+          {
+            data:"S0900",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S0930",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S1000",
+            render: function(data, type, row){
+                return '';
+            }
+          }
+          ,
+          {
+            data:"S1030",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S1100",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S1130",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S1200",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S1230",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S1300",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S1330",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S1400",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S1430",
+            render: function(data, type, row){
+                return '';
+            }
+          }
+          ,
+          {
+            data:"S1500",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S1530",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S1600",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S1630",
+            render: function(data, type, row){
+                return '';
+            }
+          }
+          ,
+          {
+            data:"S1700",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S1730",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S1800",
+            render: function(data, type, row){
+                return '';
+            }
+          },
+          {
+            data:"S1830",
+            render: function(data, type, row){
+                return '';
+            }
+          }
+        ]
+      });
+    });
+
+    // 执行每分钟定时的函数，虚线显示当前的时间
+    window.onload = function() {
+
+      var date = new Date(); //获取当前时间
+      var hour = date.getHours();
+      var min = (date.getMinutes() / 60).toFixed(2);
+
+      var mathcontent = (Number(Math.abs(hour - 8)) + Number(min)).toFixed(2);
+
+      var content = (mathcontent / 10.5).toFixed(2); // 10.5个小时为全程10.5个小时
+
+      var width = document.body.offsetWidth - 90; // 屏幕的宽度
+      var width2 = content * width; // 应该显示的位置的宽度
+      $("div.move1").removeClass("left");
+      $("div.move1").css("left", width2 + "px");
+        if(hour < 8 || (hour >18 && min>30)){ // 如果是8点之前或者18点半之后，就不显示
+          $("div.move1").css("display","none");
+        }
+
+      var obj = setInterval(function() {
+        i++;
+        var content = width2 + i;
+        $("div.move1").removeClass("left");
+        $("div.move1").css("left", content + "px");
+
+        if (width2 + i > document.documentElement.clientWidth - 10) {
+          clearTimeout(obj);
+        }
+      }, 1000 * 60);
+
+    };
   </script>
-    </body>
+</body>
+
 </html>
