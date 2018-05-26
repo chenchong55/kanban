@@ -160,7 +160,10 @@
         "columns": [
           {
             data:"xlg",
-            width:'45px'
+            width:'45px',
+            render:function(data, type, row){
+              return data+' <span style="border-radius: 50%;height: 18px;width: 18px;display:inline-block;background: #FF0033;vertical-align: top;"><span style="display: block;color:#FFFFFF;height: 18px;line-height: 18px;text-align: center">'+row.wxcs+'</span></span>';
+            }
           },
           {
             data:"S0800",
@@ -305,6 +308,10 @@
             render: function(data, type, row){
                 return '';
             }
+          },
+          {
+            data: "wxcs",
+            "visible": false
           }
         ]
       });
